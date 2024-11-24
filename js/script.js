@@ -1,20 +1,69 @@
-// Toggle class active
-const navbarNav = document.querySelector('.navbar-nav');
+// Toggle class active humberger menu
+const navbarNav = document.querySelector(".navbar-nav");
 
 // Ketika dokumen menu di klik
 
-document.querySelector('#humberger-menu').onclick = () => {
-  navbarNav.classList.toggle('active');
+document.querySelector("#humberger-menu").onclick = () => {
+  navbarNav.classList.toggle("active");
 };
 
+// toggle class active search form
+const searchForm = document.querySelector(".search-form");
+const searchBox = document.querySelector("#search-box");
 
-// klik diluar sidebar untuk menghilangkan nav
+document.querySelector("#search-button").onclick = (e) => {
+  searchForm.classList.toggle("active");
+  searchBox.focus();
+  e.preventDefault();
+};
 
-const humberger = document.querySelector('#humberger-menu');
+// toggle class active shopping cart
+const shoppingCart = document.querySelector(".shopping-cart");
 
-document.addEventListener('click', function(e) {
-  if(!humberger.contains(e.target) && !navbarNav.contains(e.target)) {
-    navbarNav.classList.remove('active');
+document.querySelector("#shopping-cart-button").onclick = (e) => {
+  shoppingCart.classList.toggle("active");
+  e.preventDefault();
+};
+
+// klik diluar elemen
+
+const hm = document.querySelector("#humberger-menu");
+const sb = document.querySelector("#search-button");
+const sc = document.querySelector("#shopping-cart-button");
+
+document.addEventListener("click", function (e) {
+  if (!hm.contains(e.target) && !navbarNav.contains(e.target)) {
+    navbarNav.classList.remove("active");
   }
-  
+  if (!sb.contains(e.target) && !searchForm.contains(e.target)) {
+    searchForm.classList.remove("active");
+  }
+  if (!sc.contains(e.target) && !shoppingCart.contains(e.target)) {
+    shoppingCart.classList.remove("active");
+  }
 });
+
+// modal box
+const itemDetailModal = document.querySelector("#item-detail-modal");
+const itemDetailButtons = document.querySelectorAll(".item-detail-button");
+
+itemDetailButtons.forEach((btn) => {
+  btn.onclick = (e) => {
+    itemDetailModal.style.display = "flex";
+    e.preventDefault();
+  };
+});
+
+// klik Tombol Close
+
+document.querySelector(".modal .close-icon").onclick = (e) => {
+  itemDetailModal.style.display = "none";
+  e.preventDefault();
+};
+
+//Klik diluar Modal
+window.onclick = (e) => {
+  if (e.target == itemDetailModal) {
+    itemDetailModal.style.display = "none";
+  }
+};
